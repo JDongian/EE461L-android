@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<!-- The HTML 4.01 Transitional DOCTYPE declaration-->
+<!-- above set at the top of the file will set     -->
+<!-- the browser's rendering engine into           -->
+<!-- "Quirks Mode". Replacing this declaration     -->
+<!-- with a "Standards Mode" doctype is supported, -->
+<!-- but may lead to some differences in layout.   -->
+
+
+<html lang="en">
+	<head>
+		<link rel="stylesheet" media="screen" href="../assets/css/style.css">
+
+		<title>OneBase Login</title>
+		<script src="https://apis.google.com/js/platform.js" async defer></script>
+		<meta name="google-signin-client_id" content="87039853586-gdg0eg9f3piiocj9frq9lcg0b2271brm.apps.googleusercontent.com">
+
+	</head>
+	<body>
+			
+			
+	
+		<div id="particles-js"></div>
+		<div class="lj-overlay lj-overlay-color"></div>
+			<div style="position:absolute; left:40px; top:40px;">
+				<div id="logo" onclick="location.href = '#';"><h1>OneBase</h1></div>
+				</div>
+			
+		
+			
+	
+		
+		<div id="wrapper" style="text-align: center">
+			<div class="login-box">
+				<div class="box-header"><br>
+				<h2>Log In</h2>
+				<br>
+				</div>
+				<label for="username">Username</label>
+				<br/>
+				<input id="input" type="text" id="username">
+				<br/>
+				<label for="password">Password</label>
+				<br/>
+				<input id="input" type="password" id="password">
+				<br/>
+				<button id="normal" onclick="location.href = 'view.html';" type="submit">Sign In</button>
+				<br/>
+				or
+				<br/>
+  				
+				<div id ="normal" align="center" class="g-signin2" data-onsuccess="onSignIn" data-theme="light">
+				<script>
+				function onSignIn(googleUser) {
+		        	// Useful data for your client-side scripts:
+			        var profile = googleUser.getBasicProfile();
+			        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+			        console.log('Full Name: ' + profile.getName());
+			        console.log('Given Name: ' + profile.getGivenName());
+			        console.log('Family Name: ' + profile.getFamilyName());
+			        console.log("Image URL: " + profile.getImageUrl());
+			        console.log("Email: " + profile.getEmail());
+			
+			        // The ID token you need to pass to your backend:
+			        var id_token = googleUser.getAuthResponse().id_token;
+			        console.log("ID Token: " + id_token);
+			      };
+		      	</script>
+				</div>
+			</div>
+		</div>
+		
+		
+
+		
+
+
+		<script src="../assets/js/particles.js"></script>
+		<script src="../assets/js/app.js"></script>
+		
+	</body>
+
+</html>

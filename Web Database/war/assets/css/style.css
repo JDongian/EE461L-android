@@ -1,0 +1,292 @@
+
+html,body,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}
+body{line-height:1}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}
+nav ul{list-style:none}
+blockquote,q{quotes:none}
+blockquote:before,blockquote:after,q:before,q:after{content:none}
+a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent;text-decoration:none}
+mark{background-color:#ff9;color:#000;font-style:italic;font-weight:bold}
+del{text-decoration:line-through}
+abbr[title],dfn[title]{border-bottom:1px dotted;cursor:help}
+table{border-collapse:collapse;border-spacing:0}
+hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0}
+input,select{vertical-align:middle}
+li{list-style:none}
+
+
+/* =============================================================================
+   My CSS
+   ========================================================================== */
+
+/* ---- base ---- */
+
+html,body{ 
+	width:100%;
+	height:100%;
+	background:#fff;
+	background: url(../css/warehouse.jpg) no-repeat center top;
+}
+
+html{
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body{
+  font:normal 75% Arial, Helvetica, sans-serif;
+}
+
+canvas{
+  display:block;
+  vertical-align:bottom;
+}
+
+
+
+
+/* ---- particles.js container ----  #4971a3*/
+
+#particles-js{
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  background-image: url('');
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+.head1 {
+	font: normal 20px  "Lucida Console", Courier, monospace;
+}
+
+
+
+.centeredPanel{
+    width:350px;
+    height:175px;
+    position:absolute;
+    border-radius: 25px;
+    top:40%;
+    left:37.5%;
+    background-color:#bad7e6;
+}​
+
+
+.lj-overlay-color {
+    background: linear-gradient(
+    	rgba(250,217,97,0.9),
+    	rgba(247,107,28,0.9));
+}
+
+.lj-overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.lj-overlay-color{
+	background:linear-gradient(rgba(60, 120, 170, 0.7),rgba(60, 76, 117, 0.7));
+	}
+
+.lj-overlay-gradient{
+	background:-moz-linear-gradient(215deg,rgba(0,204,255,0.8) 0%,rgba(196,255,0,0.8) 100%);
+	background:-webkit-gradient(linear,left bottom,right top,color-stop(0%,rgba(0,204,255,0.8)),color-stop(100%,rgba(196,255,0,0.8)));
+	background:-webkit-linear-gradient(215deg,rgba(0,204,255,0.8) 0%,rgba(196,255,0,0.8) 100%);
+	background:-o-linear-gradient(215deg,rgba(0,204,255,0.8) 0%,rgba(196,255,0,0.8) 100%);
+	background:-ms-linear-gradient(215deg,rgba(0,204,255,0.8) 0%,rgba(196,255,0,0.8) 100%);
+	background:linear-gradient(215deg,rgba(0,204,255,0.8) 0%,rgba(196,255,0,0.8) 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#00ccff',endColorstr='#c4ff00',GradientType=1) progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/1x1.png');pointer-events:none;
+}
+
+
+.logoPanel{
+    width:55px;
+    height:55px;
+
+
+    background-color:#bad7e6;
+}​
+
+
+
+.toprow{
+	top:40px;
+	left:40px;
+	width:1160px;
+	height:85px;
+}
+
+
+$(document).ready(function(){
+var heightMargin =  -($('.centeredPanel').height()/2);
+var widthMargin=  -($('.centeredPanel').width()/2);
+$('.centeredPanel').css('margin-left',widthMargin);
+$('.centeredPanel').css('margin-top',heightMargin);
+});
+
+$(window).resize(function(){
+var heightMargin =  -($('.centeredPanel').height()/2);
+var widthMargin=  -($('.centeredPanel').width()/2);
+$('.centeredPanel').css('margin-left',widthMargin);
+$('.centeredPanel').css('margin-top',heightMargin);
+});
+
+
+/*---------------------------------
+	Top Bar
+------------------------------------
+	By default, top navigation bar uses "fixed" position
+*/
+#section-topbar ul#nav {
+	display: inline-block;
+	position: relative;
+	margin: 0;
+	padding: 0;
+
+	border-right: 1px solid #222;
+
+	/* For IE, the outcast */
+	zoom:1;
+	*display: inline;
+}
+
+#section-topbar ul#nav > li {
+	display: block;
+    float: left;
+    padding: 0;
+}
+
+
+#section-topbar ul#nav a {
+  display: block;
+  font: normal 11px/18px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-decoration: none;
+  padding: 18px 20px 18px 20px;
+  border-left: 1px solid #222;
+}
+
+	#section-topbar ul#nav a:hover {
+	  background: #222;
+	  text-decoration: none;
+	  border-left: 1px solid #111;
+	}
+
+	#section-topbar ul#nav .active a {
+		background: #44bbaa;
+		border-left: 1px solid #111;
+	}
+
+		#section-topbar ul#nav .active a:hover {
+			background: #44bbaa;
+		}
+#section-topbar i {
+	font-size: 25px;
+}
+
+#headerwrap {
+	background: transparent;
+	margin-top: 0px;
+	padding-top:10px;
+	text-align:center;
+	min-height: 5%;
+	width: 100%;
+}
+#headerwrap h1 {
+	font: normal 30px  "Lucida Console", Courier, monospace;
+	color: white;
+}
+
+.login-box {
+	background-color: white;
+	width: 340px;
+	margin: 0 auto;
+	position: absolute;
+	top: 35%;
+	left: 37.5%;
+	padding-bottom: 30px;
+	border-radius: 5px;
+	box-shadow: 0 5px 50px rgba(0,0,0,0.4);
+	text-align: center;
+}
+
+.login-box .box-header {
+	background-color: #6a7fb8;
+	margin-top: 0;
+	border-radius: 5px 5px 0 0;
+}
+
+.login-box label {
+	font-weight: 700;
+	font-size: .8em;
+	color: #888;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	line-height: 2em;
+}
+
+#input {
+	margin-bottom: 10px;
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+	font-size: .9em;
+	color: #888;
+}
+
+.login-box input:focus {
+	outline: none;
+	border-color: #665851;
+	transition: 0.5s;
+	color: #665851;
+}
+
+.login-box button {
+	margin-top: 0px;
+	border: 0;
+	border-radius: 2px;
+	color: white;
+	padding: 10px;
+	text-transform: uppercase;
+	font-weight: 400;
+	font-size: 0.7em;
+	background-color: #6a7fb8;
+	letter-spacing: 1px;
+	cursor:pointer;
+	outline: none;
+}
+
+
+
+#normal:hover {
+	opacity: 0.7;
+	transition: 0.5s;
+}
+
+
+.login-box h2 {
+	font-size: 20px;
+	color: #ffffff;
+	text-transform: uppercase;
+}
+
+.login-box button:hover {
+	opacity: 0.7;
+	transition: 0.5s;
+}
+
+.login-box button:hover {
+	opacity: 0.7;
+	transition: 0.5s;
+}
+
+#logo {
+	font-size: 40px;
+	color: white;
+	font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+#logo:hover {
+	cursor:pointer;
+}
