@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h2>Login</h2>
+
+  <form method="post" action="{{ url_for('login') }}">
+    {% if True %}
+
+    {{ form.hidden_tag() }}
+    {{ form.username.label }} {{ form.username(size=50) }}
+    {{ form.password.label }} {{ form.password(size=50) }}
+    <input type="submit" value="Go">
+
+    {% else %}
+
+    <dl>
+      {{ form.hidden_tag() }}
+      <dt>Username:
+      <dd>{{ form.username(size=50) }}
+      <dt>Password:
+      <dd>{{ form.password(size=50) }}
+      <input type="submit" value="Go">
+    </dl>
+
+    {% endif %}
+  </form>
+  
+{% endblock %}
