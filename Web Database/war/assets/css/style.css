@@ -41,10 +41,14 @@ canvas{
   vertical-align:bottom;
 }
 
+.head1 {
+	font: normal 20px  "Lucida Console", Courier, monospace;
+}
 
 
 
-/* ---- particles.js container ----  #4971a3*/
+
+/* ---- particles.js container ----  */
 
 #particles-js{
   width: 100%;
@@ -55,23 +59,6 @@ canvas{
   background-position: 50% 50%;
   background-repeat: no-repeat;
 }
-
-.head1 {
-	font: normal 20px  "Lucida Console", Courier, monospace;
-}
-
-
-
-.centeredPanel{
-    width:350px;
-    height:175px;
-    position:absolute;
-    border-radius: 25px;
-    top:40%;
-    left:37.5%;
-    background-color:#bad7e6;
-}​
-
 
 .lj-overlay-color {
     background: linear-gradient(
@@ -110,8 +97,6 @@ canvas{
     background-color:#bad7e6;
 }​
 
-
-
 .toprow{
 	top:40px;
 	left:40px;
@@ -134,57 +119,6 @@ $('.centeredPanel').css('margin-left',widthMargin);
 $('.centeredPanel').css('margin-top',heightMargin);
 });
 
-
-/*---------------------------------
-	Top Bar
-------------------------------------
-	By default, top navigation bar uses "fixed" position
-*/
-#section-topbar ul#nav {
-	display: inline-block;
-	position: relative;
-	margin: 0;
-	padding: 0;
-
-	border-right: 1px solid #222;
-
-	/* For IE, the outcast */
-	zoom:1;
-	*display: inline;
-}
-
-#section-topbar ul#nav > li {
-	display: block;
-    float: left;
-    padding: 0;
-}
-
-
-#section-topbar ul#nav a {
-  display: block;
-  font: normal 11px/18px "Helvetica Neue", Helvetica, Arial, sans-serif;
-  text-decoration: none;
-  padding: 18px 20px 18px 20px;
-  border-left: 1px solid #222;
-}
-
-	#section-topbar ul#nav a:hover {
-	  background: #222;
-	  text-decoration: none;
-	  border-left: 1px solid #111;
-	}
-
-	#section-topbar ul#nav .active a {
-		background: #44bbaa;
-		border-left: 1px solid #111;
-	}
-
-		#section-topbar ul#nav .active a:hover {
-			background: #44bbaa;
-		}
-#section-topbar i {
-	font-size: 25px;
-}
 
 #headerwrap {
 	background: transparent;
@@ -290,3 +224,77 @@ $('.centeredPanel').css('margin-top',heightMargin);
 #logo:hover {
 	cursor:pointer;
 }
+
+
+/* ---- view.html ---- */
+.viewPanel {
+    width:1000px;
+    height:550px;
+    position:absolute;
+    border-radius: 5px;
+    border: 2px solid #665851;
+    top: 40%;
+  	left: 50%;
+  	margin: -150px 0 0 -500px;
+    background-color:white;
+    box-shadow: 0 5px 50px rgba(0,0,0,0.4);
+    
+}​
+
+.buffer{
+	
+}
+
+
+/* ---- databases.html ---- */
+.title {
+	position:absolute;
+	top: 32%;
+	left: 37.5%;
+	font: normal 20px  "Lucida Console", Courier, monospace;
+	color: #f1f1f1;
+}
+
+.centeredButton {
+	top: 75%;
+  	left: 50%;
+  	margin: -10px 0 0 -80px;
+  	position: absolute;
+  	background-color: #6a7fb8;
+	cursor:pointer;
+	outline: none;
+	text-transform: uppercase;
+	outline: none;
+	color: white;
+	border-radius:5px;
+	letter-spacing: 1px;
+	font-size: 12px;
+	padding: 10px;
+ 	width: 100px;
+}
+
+.radio input {
+	margin-left: 220px;
+}
+.radio {
+	margin-top: 220px;
+}
+
+.centeredPanel {
+    width:1000px;
+    height:300px;
+    position:absolute;
+    border-radius: 5px;
+    border: 2px solid #665851;
+    top: 60%;
+  	left: 50%;
+  	margin: -150px 0 0 -500px;
+    background-color:white;
+    box-shadow: 0 5px 50px rgba(0,0,0,0.4);
+}​
+
+
+
+
+
+
