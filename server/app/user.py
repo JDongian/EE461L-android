@@ -42,10 +42,13 @@ class User(db.Model):
         return self.username
 
     def logout(self):
-        authenticated = False
+        self.authenticated = False
+        db.session.commit()
 
     def check_password(self, password):
         status = password == self.password
+        print("cmp '{}' '{}' -> {}".format(password, self.password, status))
         if status:
-            authenticated = True
+            self.authenticated = True
+            db.session.commit()
         return status

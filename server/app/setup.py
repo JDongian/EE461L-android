@@ -2,6 +2,7 @@ from user import User
 from user import db
 
 def setup_database():
+    db.drop_all()
     db.create_all()
     users = [User('admin@jdong.me', 'admin'),
             User('guest@jdong.me', 'guest')]

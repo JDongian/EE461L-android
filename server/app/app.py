@@ -25,16 +25,26 @@ def load_user(user_id):
     return User.query.get(user_id)
 
 
-@app.route('/api/login', methods=['GET', 'POST'])
+@app.route('/api/login', methods=['POST'])
 def api_login():
-    """Login the current user by processing the form."""
-    user = User.query.get(request.username)
+    """Login the current user by processing the form.
+    Something is gravely wrong here."""
+    #import IPython; shell = IPython.terminal.embed.InteractiveShellEmbed(); shell.mainloop()
+    data = request.form
+    print(data)
+    user = User.query.get(data['username'])
+    print(user)
     if user:
-        user.check_password(request.password)
+        print('user ok')
+        user.check_password(data['password'])
+        print('user checked')
         if user.is_authenticated():
+            print('user authed')
             login_user(user, remember=True)
-
-    return jsonify(**{'logged_in': current_user.is_authenticated})
+            print('user logged in')
+        return jsonify(**{'logged_in': True})
+    else:
+        return jsonify(**{'logged_in': False})
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -81,4 +91,10 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    import sys
+
+    debug_mode = False
+    if len(sys.argv) > 1 and sys.argv[1] == "DEBUG":
+        debug_mode = True
+
+    app.run(debug=debug_mode)

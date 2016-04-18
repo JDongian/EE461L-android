@@ -19,12 +19,12 @@ class LoginForm(Form):
 
         user = User.query.get(self.username.data)
         if user is None:
-            print('user fail')
+            #print('user fail')
             self.username.errors.append('Unknown username')
             return False
 
         if not user.check_password(self.password.data):
-            print('pwd fail')
+            #print('pwd fail')
             self.password.errors.append('Invalid password')
             return False
 
