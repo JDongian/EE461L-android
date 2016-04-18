@@ -147,7 +147,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private void attemptLogin() {
 
 //TESTING HERE TODO
-Intent intent = new Intent(this, BarcodeScannerActivity.class);
+//Intent intent = new Intent(this, BarcodeScannerActivity.class);
+Intent intent = new Intent(this, InventorySelectActivity.class);
 startActivity(intent);
 
         if (mAuthTask != null) {

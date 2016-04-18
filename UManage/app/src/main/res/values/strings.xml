@@ -13,8 +13,16 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="title_activity_barcode_scanner">BarcodeScannerActivity</string>
+    <string name="title_activity_barcode_scanner">Barcode Scanner</string>
+    <string name="title_activity_inventory_select">Inventory Select</string>
+    <string name="title_activity_main_menu">Main Menu</string>
+    <string name="title_activity_view_inventory">View Inventory</string>
+
     <string name="scan">Scan</string>
-    <string name="title_activity_inventory_select">InventorySelectActivity</string>
+    <string name="add_to_inventory">Add To Inventory</string>
+    <string name="remove_from_inventory">Remove From Inventory</string>
+    <string name="view_inventory">View Inventory</string>
+    <string name="switch_inventory">Switch Inventory</string>
+
 
 </resources>
