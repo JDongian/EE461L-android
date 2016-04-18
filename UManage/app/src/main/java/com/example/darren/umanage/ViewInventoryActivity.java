@@ -2,6 +2,8 @@ package com.example.darren.umanage;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -10,14 +12,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class InventorySelectActivity extends AppCompatActivity {
+public class ViewInventoryActivity extends AppCompatActivity {
 
     ListView listView ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inventory_select);
+        setContentView(R.layout.activity_view_inventory);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -62,15 +64,9 @@ public class InventorySelectActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),
                         "Position :" + itemPosition + "  ListItem : " + itemValue, Toast.LENGTH_LONG)
                         .show();
-
-                //switch to main menu activity
-                Intent intent = new Intent(InventorySelectActivity.this, MainMenuActivity.class);
-                startActivity(intent);
-
             }
 
         });
-
-
     }
+
 }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.example.darren.umanage.InventorySelectActivity">
+    tools:context=".ViewInventoryActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbarlayout"
@@ -22,7 +22,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_inventory_select" />
+    <include layout="@layout/content_view_inventory" />
 
 
 </android.support.design.widget.CoordinatorLayout>
