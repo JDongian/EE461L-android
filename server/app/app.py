@@ -31,6 +31,8 @@ def api_login():
     Something is gravely wrong here."""
     #import IPython; shell = IPython.terminal.embed.InteractiveShellEmbed(); shell.mainloop()
     data = request.form
+    if not data:
+        data = request.json
     print(data)
     user = User.query.get(data['username'])
     print(user)
@@ -49,7 +51,6 @@ def api_login():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     """Display the login form."""
-    #print(userdb)
 
     form = LoginForm()
     if form.validate_on_submit():
@@ -80,7 +81,7 @@ def api_logout():
 @app.route('/logout', methods=['GET', 'POST'])
 @login_required
 def logout():
-    # wtf is this
+    # rip apis
     api_logout()
     return redirect(url_for('index'))
 
@@ -89,6 +90,31 @@ def logout():
 def index():
     return render_template('index.html')
 
+@app.route('/api/get_categories')
+def get_categories():
+    # TODO: replace dummy
+    return jsonify(**{'categories': ['beyblade', 'magic', 'plushies', 'adult']})
+
+@app.route('/api/get_items', methods=['GET', 'POST'])
+def get_items_by_category():
+    # TODO: replace dummy
+    data = request.form
+    if not data:
+        data = request.json
+    category = data['category']
+    return jsonify(**{'category': category,
+        'items': ['my little pony 450', 'care bear Mysteria', 'dragon egg', 'pika plush']})
+
+
+@app.route('/category')
+def category():
+    # TODO: replace dummy
+    return render_template('test.html')
+
+@app.route('/inventory')
+def inventory():
+    # TODO: replace dummy
+    return render_template('show_entries.html')
 
 if __name__ == '__main__':
     import sys

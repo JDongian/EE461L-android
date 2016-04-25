@@ -1,24 +1,60 @@
 {% extends "layout.html" %}
 {% block body %}
+  <br>
   <h2>Login</h2>
 
   <form method="post" action="{{ url_for('login') }}">
     {% if True %}
-
-    {{ form.hidden_tag() }}
-    {{ form.username.label }} {{ form.username(size=50) }}
-    {{ form.password.label }} {{ form.password(size=50) }}
-    <input type="submit" value="Go">
+      {{ form.hidden_tag() }}
+   <div>
+    <div class="textIn">
+      {{ form.username.label }}:
+    </div>
+    <div class="inLine" align="center">
+      {{ form.username(size=40) }}
+    </div>
+   </div>
+      <br>
+      <br>
+   <div>
+    <div class="textIn">
+      {{ form.password.label }}:
+    </div>
+    <div class="inLinePass" align="center">
+      {{ form.password(size=40) }}
+    </div>
+   </div>
+    <br>
+    <br>
+    <div align="center"> 
+      <input class="go pure-button pure-button-primary" type="submit" value="Go">
+    </div>
 
     {% else %}
 
     <dl>
       {{ form.hidden_tag() }}
+    <div>
+     <div class="textIn"> 
       <dt>Username:
-      <dd>{{ form.username(size=50) }}
-      <dt>Password:
-      <dd>{{ form.password(size=50) }}
-      <input type="submit" value="Go">
+     </div>
+     <div class="inLine" align="center">
+      <dd>{{ form.username(size=40) }}
+     </div>
+    </div>
+    <div>
+     <div class="textIn">
+      <dt>Password: 
+     </div>
+     <div class="inLinePass" align="center">
+      <dd>{{ form.password(size=40) }}
+     </div>
+    </div> 
+      <br>
+      <br>
+    <div align="center"> 
+      <input class="go pure-button pure-button-primary" type="submit" value="Go">
+    </div>
     </dl>
 
     {% endif %}
