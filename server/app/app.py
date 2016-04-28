@@ -15,7 +15,6 @@ app.config.from_object("config")
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-
 @login_manager.user_loader
 def load_user(user_id):
     """Given *user_id*, return the associated User object.
@@ -24,6 +23,8 @@ def load_user(user_id):
     """
     return User.query.get(user_id)
 
+
+## API
 
 @app.route('/api/login', methods=['POST'])
 def api_login():
@@ -48,6 +49,73 @@ def api_login():
     else:
         return jsonify(**{'logged_in': False})
 
+@app.route('/api/logout', methods=['GET', 'POST'])
+@login_required
+def api_logout():
+    logout_user()
+    return jsonify(**{'action': 'logout'})
+
+@app.route('/api/get_categories')
+def get_categories():
+    # TODO: replace dummy
+    return jsonify(**{'categories': ['beyblade', 'magic', 'plushies', 'adult']})
+
+@app.route('/api/get_items', methods=['GET', 'POST'])
+def get_items_by_category():
+    # TODO: replace dummy
+    data = request.form
+    if not data:
+        data = request.json
+    category = data['category']
+    return jsonify(**{'category': category,
+        'items': ['my little pony 450', 'care bear Mysteria', 'dragon egg', 'pika plush']})
+
+@app.route('/api/add_category', methods=['GET', 'POST'])
+def add_category():
+    """Add a category.
+    API spec:
+        input: {'category': <category>}
+        output: {'action': "add_category"|"none",
+                 'category': <category>,
+                 'status': "ok"|"category already exists"})
+    """
+    data = request.form
+    if not data:
+        data = request.json
+    category = data['category']
+    # TODO: actually add the category
+    return jsonify(**{'action': "add_category",
+                      'category': category,
+                      'status': "ok"})
+
+@app.route('/api/add_item', methods=['GET', 'POST'])
+def add_item():
+    """Add an item to a category.
+    API spec:
+        input: {'category': <category>,
+                'item': <item>,
+                'count': [1]}
+        output: {'action': "add_item"|"none",
+                 'status': "ok"|"category not found"})
+    """
+    data = request.form
+    if not data:
+        data = request.json
+    item = data['item']
+    count = int(data.get('count', 1))
+    category = data['category']
+    # TODO: actually add the item
+    result = {'action': "add_item",
+              'status': "ok"}
+    return jsonify(**result)
+
+
+## Views
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     """Display the login form."""
@@ -68,15 +136,9 @@ def login():
         #return redirect(next_url or url_for('index'))
         return redirect(url_for('index'))
     else:
-        flash(u'Invalid username or password')
+        if form.username.data:
+            flash(u'Invalid username or password')
         return render_template('login.html', form=form)
-
-
-@app.route('/api/logout', methods=['GET', 'POST'])
-@login_required
-def api_logout():
-    logout_user()
-    return jsonify(**{'action': 'logout'})
 
 @app.route('/logout', methods=['GET', 'POST'])
 @login_required
@@ -84,27 +146,6 @@ def logout():
     # rip apis
     api_logout()
     return redirect(url_for('index'))
-
-
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-@app.route('/api/get_categories')
-def get_categories():
-    # TODO: replace dummy
-    return jsonify(**{'categories': ['beyblade', 'magic', 'plushies', 'adult']})
-
-@app.route('/api/get_items', methods=['GET', 'POST'])
-def get_items_by_category():
-    # TODO: replace dummy
-    data = request.form
-    if not data:
-        data = request.json
-    category = data['category']
-    return jsonify(**{'category': category,
-        'items': ['my little pony 450', 'care bear Mysteria', 'dragon egg', 'pika plush']})
-
 
 @app.route('/category')
 def category():
