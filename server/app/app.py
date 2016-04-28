@@ -116,6 +116,21 @@ def inventory():
     # TODO: replace dummy
     return render_template('show_entries.html')
 
+@app.route('/home')
+def home():
+    # TODO: replace dummy
+    return render_template('home.html')
+
+@app.route('/about')
+def about():
+    # TODO: replace dummy
+    return render_template('about.html')
+
+@app.route('/contact')
+def contact():
+    # TODO: replace dummy
+    return render_template('contact.html')
+
 if __name__ == '__main__':
     import sys
 
