@@ -93,7 +93,7 @@ def add_item():
     """Add an item to a category.
     API spec:
         input: {'category': <category>,
-                'item': <item>,
+                'item_id': <item>,
                 'count': [1]}
         output: {'action': "add_item"|"none",
                  'status': "ok"|"category not found"})
@@ -101,9 +101,9 @@ def add_item():
     data = request.form
     if not data:
         data = request.json
-    item = data['item']
-    count = int(data.get('count', 1))
     category = data['category']
+    item = data['item_id']
+    count = int(data.get('count', 1))
     # TODO: actually add the item
     result = {'action': "add_item",
               'status': "ok"}
