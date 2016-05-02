@@ -9,10 +9,10 @@ class AppTestCase(unittest.TestCase):
         return self.app.post('/login', data=dict(
             username=username,
             password=password
-        ), follow_redirects=True)
+            ), follow_redirects=True)
 
-    def logout(self):
-        return self.app.get('/logout', follow_redirects=True)
+        def logout(self):
+            return self.app.get('/logout', follow_redirects=True)
 
     def setUp(self):
         self.db_fd, app.app.config['DATABASE'] = tempfile.mkstemp()
@@ -25,10 +25,45 @@ class AppTestCase(unittest.TestCase):
         os.close(self.db_fd)
         os.unlink(app.app.config['DATABASE'])
 
-    def test_empty_db(self):
+    def test_web_index(self):
         rv = self.app.get('/')
         assert str(rv.data).find('log in') >= 0
         assert str(rv.data).find('OneBase') >= 0
+
+    def test_web_category(self):
+        #cat = self.app.get('/category')
+        #assert str(cat.data).find('Select Category') >= 0
+        pass
+
+    def test_web_inventory(self):
+        inv = self.app.get('/inventory')
+        assert str(inv.data).find('OneBase') >= 0
+
+    def test_web_home(self):
+        ho = self.app.get('/home')
+        assert str(ho.data).find('We are OneBase') >= 0
+
+    def test_web_about(self):
+        ab = self.app.get('/about')
+        assert str(ab.data).find('database management tool') >= 0
+
+    def test_web_contact(self):
+        con = self.app.get('/contact')
+        assert str(con.data).find('following emails') >= 0
+
+    def test_web_login(self):
+        lg = self.app.get('/login')
+        assert str(lg.data).find('Login') >= 0
+
+    def test_web(self):
+        self.test_web_index()
+        self.test_web_category()
+        self.test_web_inventory()
+        self.test_web_home()
+        self.test_web_about()
+        self.test_web_contact()
+        self.test_web_login()
+
 
 #    def test_login_logout(self):
 #        rv = self.login('admin', 'default')

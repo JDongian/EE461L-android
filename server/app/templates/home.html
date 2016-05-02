@@ -3,12 +3,27 @@
   <div class="pure-menu pure-menu-horizontal">
     <a href="home" class="pure-menu-heading pure-menu-link">HOME</a>
     <ul class="pure-menu-list">
-        <li class="pure-menu-item"><a href="login" class="pure-menu-link">Get Started</a></li>
+        {% if current_user.is_authenticated %}
+            <li class="pure-menu-item"><a href="category" class="pure-menu-link">Get Started</a></li>
+        {% else %}
+            <li class="pure-menu-item"><a href="login" class="pure-menu-link">Get Started</a></li>
+        {% endif %}
+
         <li class="pure-menu-item"><a href="about" class="pure-menu-link">About</a></li>
         <li class="pure-menu-item"><a href="contact" class="pure-menu-link">Contact</a></li>
     </ul>
   </div>
   <br>
   <h2>We are OneBase</h2>
-  <p>Select "Get Started" to log in!</p>
+  {% if current_user.is_authenticated %}
+  <p>logged in as
+  {% if current_user.username %}
+  <b>{{ current_user.username }}</b>
+  {% else %}
+  unknown (error)
+  {% endif %}
+  </p>
+  {% else %}
+  <p>not logged in.</p>
+  {% endif %}
 {% endblock %}

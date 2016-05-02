@@ -6,12 +6,9 @@
   <h2>Select Category</h2>
   <br>
   <div align="center">
-  <input class="choose pure-button" type="button" value="Category 1" margin-bottom: 20px">
-  <input class="choose pure-button" type="button" value="Category 2">
-  <br>
-  <input class="choose pure-button" type="button" value="Category 3">
-  <input class="choose pure-button" type="button" value="Category 4">
-  <br>
+      {% for category in categories %}
+      <a class="choose pure-button" type="button" value="{{category}}" href="inventory">
+      {% endfor %}
   </div>
 
  <div align="right">
