@@ -18,6 +18,9 @@
         android:layout_height="wrap_content"
         android:text="@string/add_to_inventory"
         android:layout_centerHorizontal="true"
+        android:background="@android:color/holo_green_dark"
+        android:padding="40dp"
+        android:layout_margin="10dp"
         android:onClick="addToInventory" />
 
     <Button
@@ -27,6 +30,9 @@
         android:text="@string/remove_from_inventory"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/add_to_inventory_button"
+        android:background="@android:color/holo_red_light"
+        android:padding="40dp"
+        android:layout_margin="10dp"
         android:onClick="removeFromInventory" />
 
     <Button
@@ -36,6 +42,9 @@
         android:text="@string/view_inventory"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/remove_from_inventory_button"
+        android:background="@android:color/holo_orange_dark"
+        android:padding="40dp"
+        android:layout_margin="10dp"
         android:onClick="viewInventory" />
 
     <Button
@@ -45,6 +54,9 @@
         android:text="@string/switch_inventory"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/view_inventory_button"
+        android:background="@android:color/holo_blue_dark"
+        android:padding="40dp"
+        android:layout_margin="10dp"
         android:onClick="switchInventory" />
 
 </RelativeLayout>

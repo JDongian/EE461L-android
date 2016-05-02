@@ -10,6 +10,19 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 public class InventorySelectActivity extends AppCompatActivity {
 
     ListView listView ;
@@ -20,6 +33,62 @@ public class InventorySelectActivity extends AppCompatActivity {
         setContentView(R.layout.activity_inventory_select);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url ="http://api.jdong.me/api/get_categories";
+
+        // Request a string response from the provided URL.
+        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, url, null ,new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray jsonArray = (JSONArray) response.get("categories");
+                    ArrayList<String> list = new ArrayList<String>();
+                    if (jsonArray != null) {
+                        int len = jsonArray.length();
+                        for (int i=0;i<len;i++){
+                            list.add(jsonArray.get(i).toString());
+                        }
+                    }
+
+                    Toast.makeText(getApplicationContext(), list.toString(), Toast.LENGTH_LONG).show();
+
+                    listView = (ListView) findViewById(R.id.list);
+
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(InventorySelectActivity.this,
+                            android.R.layout.simple_list_item_1, android.R.id.text1, list);
+
+
+                    // Assign adapter to ListView
+                    listView.setAdapter(adapter);
+
+                    // ListView Item Click Listener
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            String itemValue = (String) listView.getItemAtPosition(position);
+
+                            Intent intent = new Intent(InventorySelectActivity.this, MainMenuActivity.class);
+                            intent.putExtra("category", itemValue);
+                            startActivity(intent);
+                        }
+
+                    });
+                }catch(JSONException e){
+                    Toast.makeText(getApplicationContext(), "Exception caught", Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
+            }
+        });
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
+
+        /*
 
         // Get ListView object from xml
         listView = (ListView) findViewById(R.id.list);
@@ -70,7 +139,6 @@ public class InventorySelectActivity extends AppCompatActivity {
             }
 
         });
-
-
+        */
     }
 }

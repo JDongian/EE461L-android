@@ -29,9 +29,22 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -146,11 +159,52 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     private void attemptLogin() {
 
-//TESTING HERE TODO
-//Intent intent = new Intent(this, BarcodeScannerActivity.class);
-Intent intent = new Intent(this, InventorySelectActivity.class);
-startActivity(intent);
+        //TESTING HERE TODO
+        //Intent intent = new Intent(this, BarcodeScannerActivity.class);
+        String email = mEmailView.getText().toString();
+        String password = mPasswordView.getText().toString();
 
+        // Instantiate the RequestQueue.
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url ="http://api.jdong.me/api/login";
+        JSONObject request = new JSONObject();
+        try {
+            request.put("username", email);         //admin@jdong.me, admin
+            request.put("password", password);
+        } catch(Exception e){
+            Toast.makeText(getApplicationContext(), "Exception caught", Toast.LENGTH_LONG).show();
+        }
+
+        // Request a string response from the provided URL.
+        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, url, request ,new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject responseObj) {
+                try {
+                    String message = responseObj.getString("logged_in");
+                    if(message.equals("true")){
+                        Intent intent = new Intent(LoginActivity.this, InventorySelectActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Invalid Username/Password " + message, Toast.LENGTH_LONG).show();
+                    }
+                } catch(Exception e){
+                    Toast.makeText(getApplicationContext(), "Exception caught", Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
+            }
+        });
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
+
+        //Intent intent = new Intent(this, InventorySelectActivity.class);
+        //startActivity(intent);
+
+        /*
         if (mAuthTask != null) {
             return;
         }
@@ -195,6 +249,7 @@ startActivity(intent);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
         }
+        */
     }
 
     private boolean isEmailValid(String email) {
