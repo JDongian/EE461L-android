@@ -16,3 +16,12 @@ h2              { font-size: 1.2em; }
 .flash          { background: #CEE5F5; padding: 0.5em;
                   border: 1px solid #AACBE2; }
 .error          { background: #F0D6D6; padding: 0.5em; }
+/* ---- Login  ---- */
+.go		{ margin-top: 0.4em; }
+.textIn		{ width: -webkit-fit-content; float: left; }
+.inLine 	{ float: left; margin-left: 10px; }
+.inLinePass	{ float: left; margin-left: 13px; }
+/* ---- Choose Category  ---- */
+.choose		{ width: 100%; margin-bottom: 0.4em }
+.button-success { background: rgb(28, 184, 65); /* this is a green */ }
+.button-error 	{ background: rgb(202, 60, 60); /* this is a maroon */ }
