@@ -7,12 +7,16 @@
   <br>
   <div align="center">
       {% for category in categories %}
-      <a class="choose pure-button" type="button" value="{{category}}" href="inventory">
+      <a class="choose pure-button" href="inventory?category={{category}}">{{category}}</a>
       {% endfor %}
   </div>
 
  <div align="right">
-  <input class="button-success pure-button" type="button" value="Add Category">
-  <input class="button-error pure-button" type="button" value="Remove Category">
+  <div>
+    <label for="category">Category:</label>
+    <input id="category" placeholder="Category"> 
+  </div>
+  <input class="button-success pure-button" type="button" value="Add Category" onclick="$.post('/api/add_category', {'category': $('#category').val()}); location.reload();">
+  <input class="button-error pure-button" type="button" value="Remove Category" onclick="$.post('/api/delete_category', {'category': $('#category').val()}); location.reload();">
  </div>
 {% endblock %}

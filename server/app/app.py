@@ -73,12 +73,10 @@ def api_logout():
     return jsonify(**{'action': 'logout'})
 
 @app.route('/api/get_categories', methods=['GET', 'POST'])
-@login_required
 def get_categories():
     return jsonify(**g_cat)
 
 @app.route('/api/get_items', methods=['GET', 'POST'])
-@login_required
 def get_items_by_category():
     # TODO: replace dummy
     data = request.form
@@ -90,7 +88,6 @@ def get_items_by_category():
     return jsonify(**({'items': g_items.get(category, None)}))
 
 @app.route('/api/add_category', methods=['GET', 'POST'])
-@login_required
 def add_category():
     """Add a category.
     API spec:
@@ -110,8 +107,57 @@ def add_category():
                       'category': category,
                       'status': "ok"})
 
+@app.route('/api/delete_category', methods=['GET', 'POST'])
+def delete_category():
+    """Delete a category.
+    API spec:
+        input: {'category': <category>}
+        output: {'action': "delete_category"|"none",
+                 'category': <category>,
+                 'status': "ok"|"category already exists"})
+    """
+    data = request.form
+    if not data:
+        data = request.json
+    if not data:
+        data = request.args
+    category = data['category']
+    g_cat['categories'].remove(category)
+    return jsonify(**{'action': "delete_category",
+                      'category': category,
+                      'status': "ok"})
+
+@app.route('/api/insert_item', methods=['GET', 'POST'])
+def insert_item():
+    """Add a new item.
+    API spec:
+        input: {'category': <category>,
+                'item_id': <item>,
+                'name': <name>,
+                'count': [1]}
+        output: {'action': "insert_item"|"none",
+                 'status': "ok"|"category not found"})
+    """
+    data = request.form
+    if not data:
+        data = request.json
+    category = data['category']
+    item = data['item_id']
+    name = data['name']
+    count = int(data.get('count', 1))
+    print(data)
+    print(g_items[category])
+    if not item in g_items[category].keys():
+        g_items[category][item] = {'name': name, 'count': count}
+        result = {'action': "insert_item",
+                  'status': "ok"}
+    else:
+        result = {'action': "none",
+                  'status': "fail"}
+    return jsonify(**result)
+
+
 @app.route('/api/add_item', methods=['GET', 'POST'])
-@login_required
 def add_item():
     """Add an item to a category.
     API spec:
@@ -134,6 +180,28 @@ def add_item():
               'status': "ok"}
     return jsonify(**result)
 
+@app.route('/api/delete_item', methods=['GET', 'POST'])
+def delete_item():
+    """Delete an item to a category.
+    API spec:
+        input: {'category': <category>,
+                'item_id': <item>,
+                'count': [1]}
+        output: {'action': "delete_item"|"none",
+                 'status': "ok"|"category not found"})
+    """
+    data = request.form
+    if not data:
+        data = request.json
+    category = data['category']
+    item = data['item_id']
+    count = int(data.get('count', 1))
+    print(data)
+    print(g_items[category])
+    g_items[category][int(item)]['count'] -= count
+    result = {'action': "delete_item",
+              'status': "ok"}
+    return jsonify(**result)
 
 ## Views
 
@@ -184,8 +252,9 @@ def category():
 @app.route('/inventory')
 @login_required
 def inventory():
-    # TODO: replace dummy
-    return render_template('show_entries.html')
+    data = request.args
+    category = data.get('category', None)
+    return render_template('show_entries.html', items=g_items.get(category))
 
 @app.route('/home')
 @login_required

@@ -1,7 +1,25 @@
 {% extends "layout.html" %}
 {% block body %}
-  
-    <div class="pure-menu pure-menu-horizontal" align="right">
+  <script type="text/javascript">
+    var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+    };
+  </script>
+
+<a class="pure-button back" type="button" href="category">Back</a>
+
+    <!-- <div class="pure-menu pure-menu-horizontal" align="right">
     <ul class="pure-menu-list">
         <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
             <a href="#" id="menuLink1" class="pure-menu-link">Sort</a>
@@ -12,7 +30,7 @@
             </ul>
         </li>
     </ul>
-    </div>
+   </div> --> 
    {% if session.logged_in %}
     <form action="{{ url_for('add_entry') }}" method="post" class="add-entry">
       <dl>
@@ -25,15 +43,52 @@
     </form>
   {% endif %}
   <ul class="entries">
-  {% for entry in entries %}
-    <li><h2>{{ entry.title }}</h2>{{ entry.text|safe }}
-  {% else %}
-    <li><em>No entries here so far.</em>
-  {% endfor %}
+
+<table class="pure-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Count</th>
+        </tr>
+    </thead>
+    {% if items %}
+    {% for key, value in items.items() %}
+    <tbody>
+    <tr>
+        <td>{{key}}</td>
+        <td>{{value['name']}}</td>
+        <td>{{value['count']}}</td>
+    </tr>
+    </tbody>
+    {% endfor %}
+    {% endif %}
+  </table>
+
+  
+
   <br>
   <div align="right">
-    <input class="button-success pure-button" type="button" value="Add Item">
-    <input class="button-error pure-button" type="button" value="Remove Item">
+  <div>
+    <label for="name">Name:</label>
+    <input id="name" placeholder="Name">
+    <br>
+    <label for="item_id">Item ID:</label>
+    <input id="itemId" placeholder="ID">
+    <br>
+    <label for="count">Count:</label>
+    <input id="count" placeholder="Count">
+    <br>
+  </div>
+  <input class="button-second pure-button" type="button" value="Insert Item" onclick="$.post('/api/insert_item', {'category': getUrlParameter('category'), 
+    'item_id': $('#itemId').val(),
+    'count': $('#count').val(), 'name': $('#name').val()}); location.reload();">
+  <input class="button-success pure-button" type="button" value="Add Item" onclick="$.post('/api/add_item', {'category': getUrlParameter('category'), 
+    'item_id': $('#itemId').val(), 
+    'count': $('#count').val()}); location.reload();">
+  <input class="button-error pure-button" type="button" value="Remove Item" onclick="$.post('/api/delete_item', {'category': getUrlParameter('category'), 
+    'item_id': $('#itemId').val(), 
+    'count': $('#count').val()}); location.reload();">
   </div>
   </ul>
 {% endblock %}
